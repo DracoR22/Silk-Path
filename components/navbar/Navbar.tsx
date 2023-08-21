@@ -5,7 +5,7 @@ import UserMenu from "./UserMenu"
 const Navbar = () => {
   return (
     <div className="fixed top-0 w-full bg-black border-b border-neutral-900 z-10">
-      <div className="py-4">
+      <div className="py-4 relative">
         <Container>
             <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
                <Logo/>

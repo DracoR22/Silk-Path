@@ -1,12 +1,20 @@
+'use client'
+
+import useRegisterModal from "@/hooks/useRegisterModal"
+import { Button } from "../ui/Button"
 
 const UserMenu = () => {
+
+ const registerModal = useRegisterModal()
+
   return (
     <div className="relative mx-5">
       <div className="flex items-center">
         <div className="mx-6">
-            <button className="bg-[#00df9a] text-white p-3 px-10 rounded-full font-medium">
+            <Button className="px-10" variant='silkPath'
+             onClick={registerModal.onOpen}>
               Register
-            </button>
+            </Button>
         </div>
         <div className="font-medium text-white">
             Login
