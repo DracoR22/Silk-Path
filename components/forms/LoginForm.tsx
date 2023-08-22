@@ -1,4 +1,4 @@
-import { RegisterValidation } from "@/lib/validations/user"
+import { LoginValidation } from "@/lib/validations/user"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from 'zod'
@@ -7,41 +7,50 @@ import { Button } from "../ui/Button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
 import { FcGoogle } from 'react-icons/fc'
-import axios from 'axios'
 import { useToast } from "../ui/use-toast"
-import useRegisterModal from "@/hooks/useRegisterModal"
-import { signIn } from "next-auth/react"
+import useLoginModal from "@/hooks/useLoginModal"
+import { signIn } from 'next-auth/react'
+import { useRouter } from "next/navigation"
 
 
-type RegisterFormValues = z.infer<typeof RegisterValidation>
+type LoginFormValues = z.infer<typeof LoginValidation>
 
 
-const RegisterForm = () => {
+const LoginForm = () => {
 
  const [isLoading, setIsLoading] = useState(false)
  const { toast } = useToast()
- const registerModal = useRegisterModal()
+ const loginModal = useLoginModal()
+ const router = useRouter()
 
- const form = useForm<RegisterFormValues>({
-   resolver: zodResolver(RegisterValidation),
+ const form = useForm<LoginFormValues>({
+   resolver: zodResolver(LoginValidation),
    defaultValues: {
      email: '',
-     name: '',
      password: '',
    }
  })
 
- const onSubmit = async (data: RegisterFormValues) => {
-    try {
-      setIsLoading(true)
-      await axios.post('/api/register', data);
-      toast({variant: 'silkPath', title: 'You created your profile!', description: 'Login to start posting!'});
-      registerModal.onClose()
-    } catch (error) {
-      toast({variant: 'destructive', description: 'Invalid credentials'})
-    } finally {
-      setIsLoading(false)
-    }
+ const onSubmit = async (data: LoginFormValues) => {
+    setIsLoading(true);
+      signIn('credentials',{
+      ...data,
+      redirect: false
+      })
+      .then((callback) => {
+        if(callback?.ok && !callback?.error) {
+            toast({variant: 'silkPath', title: 'You logged in to your profile'});
+            router.refresh()
+            setIsLoading(false)
+            loginModal.onClose()
+          }
+
+        if (callback?.error) {
+            toast({variant: 'destructive', title: 'Invalid credentials'});
+            setIsLoading(false)
+        }
+      })
+
  }
 
   return (
@@ -57,20 +66,6 @@ const RegisterForm = () => {
                <Input type="text" {...field} 
                className="border border-neutral-800 bg-neutral-700 text-white focus-visible:ring-0
                focus-visible:ring-transparent focus-visible:ring-offset-0" placeholder="Email"/>
-              </FormControl>
-              <FormMessage/>
-           </FormItem>
-        )}/>
-         {/* NAME */}
-         <FormField control={form.control} name="name" render={({ field }) => (
-           <FormItem className="flex flex-col gap-4 -mt-4">
-              <FormLabel className="text-base semibold ml-2 -mb-3">
-                Name
-              </FormLabel>
-              <FormControl>
-               <Input type="text" {...field} 
-               className="border border-neutral-800 bg-neutral-700 text-white focus-visible:ring-0
-               focus-visible:ring-transparent focus-visible:ring-offset-0" placeholder="Name"/>
               </FormControl>
               <FormMessage/>
            </FormItem>
@@ -109,12 +104,12 @@ const RegisterForm = () => {
           </div>
         </div>
         <Button isLoading={isLoading} className="w-full" variant='silkPath' type="submit">
-           Register 
+           Login
         </Button>
 
               <div className="flex items-center gap-4 mb-1">
               <p className="text-neutral-400 text-xs cursor-pointer">
-                Already have an account? <span className="text-[#00df9a] hover:underline">Login</span>
+                Dont have an account yet? <span className="text-[#00df9a] hover:underline">Register</span>
               </p>
              </div>
       </form>
@@ -122,4 +117,4 @@ const RegisterForm = () => {
   )
 }
 
-export default RegisterForm
+export default LoginForm

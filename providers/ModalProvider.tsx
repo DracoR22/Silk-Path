@@ -1,6 +1,7 @@
 'use client'
 
 import RegisterModal from "@/components/modals/RegisterModal"
+import LoginModal from "@/components/modals/LoginModal"
 import { useEffect, useState } from "react"
 
 const ModalProvider = () => {
@@ -18,6 +19,7 @@ const ModalProvider = () => {
   return (
     <>
     <RegisterModal/>
+    <LoginModal/>
     </>
   )
 }

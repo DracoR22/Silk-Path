@@ -5,7 +5,7 @@ interface Props {
     isOpen: boolean
     onChange: (open: boolean) => void
     title?: string
-    description: string
+    description?: string
     children: React.ReactNode
 }
 
