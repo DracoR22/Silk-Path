@@ -1,3 +1,5 @@
+
+import getCurrentUser from "@/actions/getCurrentUser"
 import { Home, Search, Heart, PlusSquare, UserCircle2 } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { useMemo } from "react"
@@ -30,12 +32,7 @@ const useRoutes = () => {
             icon: PlusSquare,
             active: pathname === '/create'
         },
-        {
-            label: 'Profile',
-            href: '/profile',
-            icon: UserCircle2,
-            active: pathname === '/profile'
-        },
+        
     ], [pathname])
 
     return routes

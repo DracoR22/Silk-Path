@@ -6,6 +6,7 @@ import Sidebar from '@/components/sidebar/Sidebar'
 import ModalProvider from '@/providers/ModalProvider'
 import { Toaster } from '@/components/ui/toaster'
 import getCurrentUser from '@/actions/getCurrentUser'
+import AuthProvider from '@/providers/AuthProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,6 +26,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <AuthProvider>
         <ModalProvider/>
         <Navbar/>
         <main className='flex flex-row'>
@@ -34,6 +36,7 @@ export default async function RootLayout({
         <Toaster/>
         </section>
         </main>
+        </AuthProvider>
       </body>
     </html>
   )

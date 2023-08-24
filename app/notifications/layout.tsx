@@ -1,4 +1,4 @@
-export default async function UsersLayout({
+export default async function NotificationsLayout({
     children
 }: {
     children: React.ReactNode
