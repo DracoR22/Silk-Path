@@ -4,7 +4,6 @@ import useRegisterModal from "@/hooks/useRegisterModal"
 import { Button } from "../ui/Button"
 import useLoginModal from "@/hooks/useLoginModal"
 import { User } from "@prisma/client"
-import { signOut } from "next-auth/react"
 import Avatar from "../Avatar"
 
 interface Props {
@@ -20,7 +19,6 @@ const UserMenu = ({currentUser}: Props) => {
     <div className="relative mx-5">
      {currentUser ? (
        <div className="flex items-center">
-         <p className="text-white" onClick={() => signOut()}>logout</p>
          <Avatar src={currentUser?.image}/>
        </div>
      ) : (

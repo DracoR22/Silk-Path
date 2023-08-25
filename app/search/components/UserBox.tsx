@@ -40,7 +40,7 @@ const UserBox = ({ data, currentUser, requests, friends }: Props) => {
     axios.post('/api/requests', { userId: data.id })
       .then(() => router.refresh())
       .finally(() => setIsLoading(false));
-  }, [data]);
+  }, [data, router]);
 
   const handleDeleteFriend = useCallback(() => {
     setIsLoading(true);
@@ -69,7 +69,7 @@ const UserBox = ({ data, currentUser, requests, friends }: Props) => {
         )
         .finally(() => setIsLoading(false));
     }
-  }, [currentUser?.id, data.id, friends, router, setIsLoading]);
+  }, [currentUser, data.id, friends, router, setIsLoading, toast]);
 
   return (
     <>
@@ -79,13 +79,14 @@ const UserBox = ({ data, currentUser, requests, friends }: Props) => {
         <p className="text-white ml-4">{data.name}</p>
         </div>
   
+         <div className="absolute right-[40px]">
         {userHasPendingRequest && (
           <Button variant='default' isLoading={isLoading} className="ml-8 bg-white hover:bg-neutral-300 transition text-black">Pending</Button>
         )}
 
         {!userHasPendingRequest && !usersAreFriends && (
            <div onClick={handleClick}>
-           <Button variant='silkPath' isLoading={isLoading} className="ml-8 transition">Add friend</Button>
+           <Button variant='silkPath' isLoading={isLoading} className="ml-8 transition">Send Request</Button>
           </div> 
         )}
 
@@ -95,7 +96,7 @@ const UserBox = ({ data, currentUser, requests, friends }: Props) => {
               Remove friend
             </Button>
         )}
-
+        </div>
       </div>
     </>
   )

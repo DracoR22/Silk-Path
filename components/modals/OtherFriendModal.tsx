@@ -1,17 +1,9 @@
 'use client'
 
 import Modal from "./Modal"
-import FriendList from "../FriendList"
-import { FullFriendType } from "@/types"
-import { User } from "@prisma/client"
 import useOtherFriendModal from "@/hooks/useOtherFriendModal"
 
-interface Props {
-  friends: FullFriendType[]
-  users: User[]
-}
-
-const OtherFriendModal = ({friends, users}: Props) => {
+const OtherFriendModal = () => {
 
  const { onClose, isOpen } = useOtherFriendModal()
 

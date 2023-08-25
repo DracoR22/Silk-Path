@@ -28,7 +28,7 @@ const NotificationBox = ({data, currentUser}: Props) => {
   axios.delete(`/api/requests/${data.id}`)
   .then(() => router.refresh())
   .catch(() => toast({variant: 'destructive', description: 'Something went wrong!'}))
- }, [data.id, router])
+ }, [data.id, router, toast])
 
  const handleFriend = useCallback(() => {
   setIsLoading(true);
@@ -38,7 +38,7 @@ const NotificationBox = ({data, currentUser}: Props) => {
     .then(() => router.refresh())
     .then(() => toast({variant: 'silkPath', description: `You and ${otherUser.name} are now friends!`}))
     .finally(() => setIsLoading(false));
-}, [data.id, otherUser.id, router]);
+}, [data.id, otherUser.id, router, otherUser.name, toast]);
 
   return (
     <div className="flex items-center mb-6 w-full">

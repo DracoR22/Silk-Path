@@ -6,6 +6,8 @@ import Image from "next/image"
 import UserItem from "./UserItem"
 import useFriendModal from "@/hooks/useFriendModal"
 import useOtherFriendModal from "@/hooks/useOtherFriendModal"
+import { Settings } from "lucide-react"
+import useSettingsModal from "@/hooks/useSettingsModal"
 
 interface Props {
     user?: User & { requests: Request[], friends: Friend[] } | null
@@ -19,9 +21,10 @@ const UserProfile = ({user, currentUser, requests, friends, users}: Props) => {
 
   const friendModal = useFriendModal()
   const otherFriendModal = useOtherFriendModal()
+  const settingsModal = useSettingsModal()
 
   return (
-    <div className="mx-6 sm:mx-[80px] my-[30px]">
+    <div className="mx-6 sm:mx-[50px] lg:mx-[220px] my-[30px]">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
          <div>
             <Image src={user?.image || '/placeholder.jpg'} alt={user?.name || ''} width={150} height={150} className="rounded-full bg-cover"/>
@@ -32,15 +35,19 @@ const UserProfile = ({user, currentUser, requests, friends, users}: Props) => {
               <p className="text-white font-medium text-xl">{user?.name}</p>
               {currentUser?.id !== user?.id && (
                 <div>
-                  
                 <UserItem requests={requests} currentUser={currentUser} user={user} friends={friends}/>
-                   
+                </div>
+              )}
+
+              {currentUser?.id === user?.id && (
+                <div className="ml-6 cursor-pointer" onClick={settingsModal.onOpen}>
+                  <Settings className="text-white"/>
                 </div>
               )}
             </div>
 
             <div className="mt-[25px] text-neutral-200 flex items-center">
-                <span className="text-white font-medium">13</span> posts
+                <span className="text-white font-medium mr-1">13 </span> posts
                 {currentUser?.id === user?.id && (
                   <div onClick={friendModal.onOpen} className="cursor-pointer">
                   <span className="text-white font-medium ml-[45px]">{user?.friends.length}</span> friends

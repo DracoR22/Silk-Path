@@ -100,7 +100,7 @@ const RegisterForm = () => {
            
           <div>
              <Button onClick={(e) => { e.preventDefault(); signIn('google') }} 
-              className="w-full bg-white text-black hover:bg-neutral-300">
+              className="w-full bg-black text-white hover:bg-[#101010]">
                Continue with Google 
                <span className="ml-3">
                <FcGoogle />

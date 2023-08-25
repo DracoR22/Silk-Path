@@ -7,6 +7,7 @@ import FriendModal from "@/components/modals/FriendModal"
 import { FullFriendType } from "@/types"
 import { User } from "@prisma/client"
 import OtherFriendModal from "@/components/modals/OtherFriendModal"
+import SettingsModal from "@/components/modals/SettingsModal"
 
 interface Props {
    friends: FullFriendType[]
@@ -31,7 +32,8 @@ const ModalProvider = ({friends, currentUser, users}: Props) => {
     <RegisterModal/>
     <LoginModal/>
     <FriendModal friends={friends}/>
-    <OtherFriendModal friends={friends} users={users}/>
+    <OtherFriendModal/>
+    <SettingsModal/>
     </>
   )
 }
