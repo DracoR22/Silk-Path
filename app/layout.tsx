@@ -7,6 +7,8 @@ import ModalProvider from '@/providers/ModalProvider'
 import { Toaster } from '@/components/ui/toaster'
 import getCurrentUser from '@/actions/getCurrentUser'
 import AuthProvider from '@/providers/AuthProvider'
+import getFriends from '@/actions/getFriends'
+import getUsers from '@/actions/getUsers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,12 +24,14 @@ export default async function RootLayout({
 }) {
 
  const currentUser = await getCurrentUser()
+ const friends = await getFriends()
+ const users = await getUsers()
 
   return (
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-        <ModalProvider/>
+        <ModalProvider friends={friends} currentUser={currentUser} users={users}/>
         <Navbar/>
         <main className='flex flex-row'>
         <Sidebar currentUser={currentUser}/>

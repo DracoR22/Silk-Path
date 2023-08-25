@@ -23,14 +23,11 @@ const NotificationBox = ({data, currentUser}: Props) => {
  const { toast } = useToast()
 
  const [isLoading, setIsLoading] = useState(false)
- const [isDeleteLoading, setDeleteIsLoading] = useState(false)
 
  const deleteRequest = useCallback(() => {
-  setDeleteIsLoading(true);
   axios.delete(`/api/requests/${data.id}`)
   .then(() => router.refresh())
   .catch(() => toast({variant: 'destructive', description: 'Something went wrong!'}))
-  .finally(() => setDeleteIsLoading(false))
  }, [data.id, router])
 
  const handleFriend = useCallback(() => {
@@ -48,7 +45,7 @@ const NotificationBox = ({data, currentUser}: Props) => {
       <div onClick={() => router.push(`profile/${otherUser.id}`)} className="cursor-pointer">
       <Avatar src={otherUser.image}/>
       </div>
-         {currentUser?.id === data.requestedId ? (
+         {currentUser?.id === data.requestedId && (
           <div className="flex items-center">
            <p className="text-white ml-6 font-bold cursor-pointer" onClick={() => router.push(`profile/${otherUser.id}`)}>
             {otherUser.name}
@@ -56,11 +53,13 @@ const NotificationBox = ({data, currentUser}: Props) => {
            <p className="text-white ml-6">Sent you a friend request</p>
             <div className="ml-6">
             <Button variant='silkPath' size='sm' className="mr-6" onClick={handleFriend} isLoading={isLoading}>Confirm</Button>
-            <Button variant='secondary' size='sm' onClick={deleteRequest} isLoading={isDeleteLoading}>Delete</Button>
+            <Button variant='secondary' size='sm' onClick={deleteRequest}>Delete</Button>
             </div>
           </div>
-         ) : (
-            <div className="flex items-center">
+         )}
+
+         {currentUser?.id !== data.requestedId && (
+           <div className="flex items-center">
             <p className="text-white mr-4 ml-6">You sent a friend request to</p>
             <p className="text-white font-bold cursor-pointer" onClick={() => router.push(`profile/${otherUser.id}`)}>
               {otherUser.name}

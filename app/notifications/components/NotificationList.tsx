@@ -17,6 +17,13 @@ const NotificationList = ({initialItems, currentUser, friends}: Props) => {
       {initialItems.map((item) => (
         <NotificationBox key={item.id} data={item} currentUser={currentUser} friends={friends}/>
       ))}
+      {initialItems.length === 0 && (
+        <div>
+          <p className="text-neutral-400 text-lg">
+            You have no new notifications
+          </p>
+        </div>
+      )}
     </div>
   </div>
   )

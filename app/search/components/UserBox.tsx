@@ -92,7 +92,7 @@ const UserBox = ({ data, currentUser, requests, friends }: Props) => {
         {usersAreFriends && (
             <Button variant='default' isLoading={isLoading}
              className="ml-8 bg-white hover:bg-neutral-300 transition text-black" onClick={handleDeleteFriend}>
-              Remove
+              Remove friend
             </Button>
         )}
 
