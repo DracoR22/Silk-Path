@@ -4,6 +4,7 @@ import getUserById from "@/actions/getUserById"
 import getRequests from "@/actions/getRequests"
 import getFriends from "@/actions/getFriends"
 import getUsers from "@/actions/getUsers"
+import getPosts from "@/actions/getPosts"
 
 interface IParams {
   profileId: string
@@ -16,10 +17,11 @@ const Page = async ({params}: { params: IParams }) => {
  const requests = await getRequests()
  const friends = await getFriends()
  const users = await getUsers()
+ const posts = await getPosts()
 
   return (
-    <div className="flex items-center justify-center">
-      <UserProfile user={user} currentUser={currentUser} requests={requests} friends={friends} users={users}/>
+    <div>
+      <UserProfile user={user} currentUser={currentUser} requests={requests} friends={friends} users={users} posts={posts}/>
     </div>
   )
 }

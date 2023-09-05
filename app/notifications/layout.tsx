@@ -12,7 +12,7 @@ export default async function NotificationsLayout({
 }) {
 
     return (
-        <div className="mx-10">
+        <div className="mx-10 mt-[50px]">
           {children}
         </div>
     )

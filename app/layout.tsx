@@ -33,7 +33,7 @@ export default async function RootLayout({
         <ModalProvider friends={friends} currentUser={currentUser} users={users}/>
         <main>
         <Sidebar currentUser={currentUser}/>
-        <section className='md:ml-[220px] mt-[50px]'>
+        <section className='md:ml-[220px] '>
         {children}
         <Toaster/>
         </section>

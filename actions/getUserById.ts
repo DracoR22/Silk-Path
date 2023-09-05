@@ -15,7 +15,8 @@ const getUserById = async (profileId: string) => {
             },
             include: {
                 requests: true,
-                friends: true
+                friends: true,
+                posts: true
             }
         })
 
