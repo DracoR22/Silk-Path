@@ -7,6 +7,7 @@ import useOtherUser from "@/hooks/useOtherUser"
 import { FullFriendType, FullRequestType } from "@/types"
 import { User } from "@prisma/client"
 import axios from "axios"
+import { UserCog, UserPlus } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useCallback, useState } from "react"
 
@@ -86,13 +87,17 @@ const UserBox = ({ data, currentUser, requests, friends }: Props) => {
 
         {!userHasPendingRequest && !usersAreFriends && (
            <div onClick={handleClick}>
-           <Button variant='silkPath' isLoading={isLoading} className="ml-8 transition">Send Request</Button>
+           <Button variant='silkPath' isLoading={isLoading} className="ml-8 transition">
+            <UserPlus className="mr-2"/>
+            Send Request
+           </Button>
           </div> 
         )}
 
         {usersAreFriends && (
             <Button variant='default' isLoading={isLoading}
              className="ml-8 bg-white hover:bg-neutral-300 transition text-black" onClick={handleDeleteFriend}>
+              <UserCog className="mr-2"/>
               Remove friend
             </Button>
         )}

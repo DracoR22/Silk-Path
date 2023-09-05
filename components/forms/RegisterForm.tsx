@@ -1,3 +1,5 @@
+'use client'
+
 import { RegisterValidation } from "@/lib/validations/user"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -11,6 +13,7 @@ import axios from 'axios'
 import { useToast } from "../ui/use-toast"
 import useRegisterModal from "@/hooks/useRegisterModal"
 import { signIn } from "next-auth/react"
+import useLoginModal from "@/hooks/useLoginModal"
 
 
 type RegisterFormValues = z.infer<typeof RegisterValidation>
@@ -21,6 +24,12 @@ const RegisterForm = () => {
  const [isLoading, setIsLoading] = useState(false)
  const { toast } = useToast()
  const registerModal = useRegisterModal()
+ const loginModal = useLoginModal()
+
+ const handleChangeModal = () => {
+  registerModal.onClose()
+  loginModal.onOpen()
+}
 
  const form = useForm<RegisterFormValues>({
    resolver: zodResolver(RegisterValidation),
@@ -46,7 +55,7 @@ const RegisterForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-10">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-6">
         {/* EMAIL */}
         <FormField control={form.control} name="email" render={({ field }) => (
            <FormItem className="flex flex-col gap-4">
@@ -113,7 +122,7 @@ const RegisterForm = () => {
         </Button>
 
               <div className="flex items-center gap-4 mb-1">
-              <p className="text-neutral-400 text-xs cursor-pointer">
+              <p className="text-neutral-400 text-xs cursor-pointer" onClick={handleChangeModal}>
                 Already have an account? <span className="text-[#00df9a] hover:underline">Login</span>
               </p>
              </div>

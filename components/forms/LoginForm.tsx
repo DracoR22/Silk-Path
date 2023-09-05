@@ -11,6 +11,7 @@ import { useToast } from "../ui/use-toast"
 import useLoginModal from "@/hooks/useLoginModal"
 import { signIn } from 'next-auth/react'
 import { useRouter } from "next/navigation"
+import useRegisterModal from "@/hooks/useRegisterModal"
 
 
 type LoginFormValues = z.infer<typeof LoginValidation>
@@ -21,7 +22,13 @@ const LoginForm = () => {
  const [isLoading, setIsLoading] = useState(false)
  const { toast } = useToast()
  const loginModal = useLoginModal()
+ const registerModal = useRegisterModal()
  const router = useRouter()
+
+ const handleChangeModal = () => {
+   loginModal.onClose()
+   registerModal.onOpen()
+ }
 
  const form = useForm<LoginFormValues>({
    resolver: zodResolver(LoginValidation),
@@ -55,7 +62,7 @@ const LoginForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-10">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-6">
         {/* EMAIL */}
         <FormField control={form.control} name="email" render={({ field }) => (
            <FormItem className="flex flex-col gap-4">
@@ -108,7 +115,7 @@ const LoginForm = () => {
         </Button>
 
               <div className="flex items-center gap-4 mb-1">
-              <p className="text-neutral-400 text-xs cursor-pointer">
+              <p className="text-neutral-400 text-xs cursor-pointer" onClick={handleChangeModal}>
                 Dont have an account yet? <span className="text-[#00df9a] hover:underline">Register</span>
               </p>
              </div>

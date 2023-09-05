@@ -20,23 +20,23 @@ interface Props {
 const UserProfile = ({user, currentUser, requests, friends, users}: Props) => {
 
   const friendModal = useFriendModal()
-  const otherFriendModal = useOtherFriendModal()
+  const { onOpen } = useOtherFriendModal()
   const settingsModal = useSettingsModal()
 
   return (
-    <div className="mx-6 sm:mx-[50px] lg:mx-[220px] my-[30px]">
+    <div className="mx-6 sm:mx-[50px] lg:mx-[200px] my-[30px]">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
          <div>
-            <Image src={user?.image || '/placeholder.jpg'} alt={user?.name || ''} width={150} height={150} className="rounded-full bg-cover"/>
+            <Image src={user?.image || '/placeholder.jpg'} alt={user?.name || ''} width={150} height={150} className="rounded-full bg-cover mx-0"/>
          </div>
 
          <div>
             <div className="flex items-center">
               <p className="text-white font-medium text-xl">{user?.name}</p>
               {currentUser?.id !== user?.id && (
-                <div>
+              
                 <UserItem requests={requests} currentUser={currentUser} user={user} friends={friends}/>
-                </div>
+                
               )}
 
               {currentUser?.id === user?.id && (
@@ -55,11 +55,10 @@ const UserProfile = ({user, currentUser, requests, friends, users}: Props) => {
                 )}
 
                  {currentUser?.id !== user?.id && (
-                  <div onClick={otherFriendModal.onOpen} className="cursor-pointer">
+                  <div onClick={() => onOpen({ user, currentUser, friends, users})} className="cursor-pointer">
                   <span className="text-white font-medium ml-[45px]">{user?.friends.length}</span> friends
                   </div>
                 )}
-
             </div>
          </div>
       </div>

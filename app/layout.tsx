@@ -1,4 +1,3 @@
-import Navbar from '@/components/navbar/Navbar'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -32,10 +31,9 @@ export default async function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
         <ModalProvider friends={friends} currentUser={currentUser} users={users}/>
-        <Navbar/>
-        <main className='flex flex-row'>
+        <main>
         <Sidebar currentUser={currentUser}/>
-        <section className='md:ml-[220px] mt-[100px]'>
+        <section className='md:ml-[220px] mt-[50px]'>
         {children}
         <Toaster/>
         </section>

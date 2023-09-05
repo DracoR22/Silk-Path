@@ -26,12 +26,6 @@ const useRoutes = () => {
             icon: Heart,
             active: pathname === '/notifications'
         },
-        {
-            label: 'Create',
-            href: '/create',
-            icon: PlusSquare,
-            active: pathname === '/create'
-        },
         
     ], [pathname])
 

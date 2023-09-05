@@ -13,8 +13,7 @@ const Modal = ({isOpen, onChange, title, description, children}: Props) => {
   return (
     <Dialog.Root open={isOpen} defaultOpen={isOpen} onOpenChange={onChange}>
       <Dialog.Portal>
-        
-        <Dialog.Content className='fixed drop-shadow-md border border-neutral-900 top-[50%] left-[50%] max-h-full
+        <Dialog.Content className='fixed drop-shadow-md border border-neutral-900 top-[40%] left-[50%] max-h-full
         md:w-[90vh] md:max-w-[450px] translate-x-[-50%] translate-y-[-40%] rounded-md bg-neutral-900 text-white
          p-[25px] focus:outline-none'>
           <Dialog.Title className='text-xl text-center font-bold mb-4'>

@@ -30,7 +30,7 @@ const toastVariants = cva(
         default: "border bg-background text-foreground",
         destructive:
           "destructive group border-destructive bg-destructive text-destructive-foreground",
-          silkPath: "bg-neutral-900 text-white font-semibold border border-neutral-900"
+          silkPath: "bg-neutral-100 text-black font-semibold"
       },
     },
     defaultVariants: {
