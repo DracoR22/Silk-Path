@@ -1,23 +1,50 @@
 'use client'
 
-import { Post } from "@prisma/client"
+import { Like, Post, User } from "@prisma/client"
 import Avatar from "./Avatar"
 import Image from "next/image"
 import { Heart, MessageCircle, MoreHorizontal } from "lucide-react"
-import { Button } from "./ui/Button"
+import { AiFillHeart } from 'react-icons/ai'
+import { FullPostType } from "@/types"
+import { useCallback } from "react"
+import { useRouter } from "next/navigation"
+import axios from "axios"
+import { useToast } from "./ui/use-toast"
+import useLikedPostModal from "@/hooks/useLikedPostModal"
 
 interface Props {
-    post: Post
+    post: FullPostType
+    likes: Like[]
+    currentUser?: User | null
 }
 
-const PostsCards = ({post}: Props) => {
+const PostsCards = ({post, likes, currentUser}: Props) => {
+
+  const router = useRouter()
+  const { toast } = useToast()
+  const { onOpen } = useLikedPostModal()
+
+  const userHasLikedPost = currentUser && post.likes.some(like => like.userId === currentUser.id);
+
+  const handleClick = useCallback(() => {
+    if(!currentUser) {
+      return toast({variant: "destructive", title: "Login to like posts"})
+    }
+    axios.post('/api/likes', { postId: post.id })
+    .then(() => router.refresh())
+    .then(() => toast({variant: "silkPath", title: "Post liked!"}))
+
+  }, [currentUser, router]);
+
   return (
     <div>
       <div className="p-4">
         <div className="flex items-center gap-4">
-          <div className="flex-1 flex items-center gap-4">
-          <Avatar src={post.userPicture}/>
-          <p className="text-sm font-bold">{post.userName}</p>
+          <div className="flex-1 flex items-center gap-4 ">
+            <div className="flex items-center gap-4 cursor-pointer" onClick={() => router.push(`/profile/${post.userId}`)}>
+            <Avatar src={post.userPicture}/>
+            <p className="text-sm font-bold">{post.userName}</p>
+            </div>
           </div>
           <button>
             <MoreHorizontal/>
@@ -28,11 +55,19 @@ const PostsCards = ({post}: Props) => {
            className="object-cover rounded-sm h-[450px]"/>
         </div>
         <div className="mt-3 flex items-center gap-2">
-          <Heart className="w-6 h-6"/>
-          <MessageCircle className="w-6 h-6"/>
+          {!userHasLikedPost && (
+            <div onClick={handleClick}>
+              <Heart className="w-6 h-6 cursor-pointer"/>
+            </div>
+          )}
+          {userHasLikedPost && (
+            <div>
+              <AiFillHeart className="w-6 h-6 text-white cursor-pointer"/>
+            </div>
+          )}
         </div>
-        <div className="mt-2 text-sm">
-          <span className="font-semibold">123</span> likes
+        <div className="mt-2 text-sm cursor-pointer" onClick={() => onOpen({post})}>
+          <span className="font-semibold">{post.likes.length}</span> likes 
         </div>
         <div className="mt-2 border-b border-neutral-900 pb-6">
           <p className="text-sm truncate"><span className="font-bold">{post.userName}</span> {post.content}</p>

@@ -21,9 +21,7 @@ const OtherFriendModal = () => {
  const { user, currentUser, friends, users } = data
 
  const navigateAndCloseModal = (userId: string) => {
-  // Navigate to the user's profile
   router.push(`/profile/${userId}`);
-  // Close the modal
   onClose();
 };
 

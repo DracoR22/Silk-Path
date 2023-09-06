@@ -19,13 +19,13 @@ const RightSidebar = ({friend}: Props) => {
    <ScrollArea>
       <div className="mt-3 mx-8">
       <div className="flex items-center gap-3">
-        <div className="flex-1 flex items-center gap-3">
+        <div className="flex-1 flex items-center gap-3 cursor-pointer" onClick={() => router.push(`/profile/${otherUser.id}`)}>
          <Avatar src={otherUser.image}/>
          <p className="text-sm truncate">{otherUser.name}</p>
         </div>
          <div className="text-sm">
            <button onClick={() => router.push(`/profile/${otherUser.id}`)}
-            className="p-2 bg-[#00df9a] text-white rounded-lg font-medium hover:bg-[#0b8a62] px-6 transition">
+            className="p-1.5 bg-[#00df9a] text-white rounded-lg font-medium hover:bg-[#0b8a62] px-6 transition">
              View
            </button>
          </div>

@@ -5,6 +5,9 @@ const getPosts = async ()  => {
         const posts = await prismadb.post.findMany({
             orderBy: {
                 createdAt: 'desc'
+            },
+            include: {
+                likes: true
             }
         })
 

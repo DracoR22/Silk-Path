@@ -1,4 +1,4 @@
-import { Friend, Request, User } from "@prisma/client";
+import { Friend, Like, Post, Request, User } from "@prisma/client";
 
 export type FullRequestType = Request & {
     users: User[]
@@ -6,4 +6,8 @@ export type FullRequestType = Request & {
 
 export type FullFriendType = Friend & {
     users: User[]
+}
+
+export type FullPostType = Post & {
+    likes: Like[]
 }

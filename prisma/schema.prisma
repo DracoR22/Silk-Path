@@ -92,6 +92,8 @@ model Like {
   createdAt DateTime @default(now())
 
   creatorId String @db.ObjectId
+  userName String
+  userImage String
 
   userId String @db.ObjectId
   user User @relation(fields: [userId], references: [id])
