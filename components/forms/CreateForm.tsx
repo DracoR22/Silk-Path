@@ -64,7 +64,7 @@ const CreateForm = () => {
             <FormItem>
                 <FormControl>
                     <Textarea disabled={isLoading}
-                     className='bg-neutral-800 border-0 focus-visible:ring-0 text-neutral-100
+                     className='bg-neutral-900 border-0 focus-visible:ring-0 text-neutral-100
                       focus-visible:ring-offset-0 text-sm' placeholder='Add a description to your post' {...field}/>
                 </FormControl>
             </FormItem>

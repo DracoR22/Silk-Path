@@ -2,11 +2,9 @@
 
 import useOtherUser from "@/hooks/useOtherUser"
 import { FullFriendType } from "@/types"
-import { User } from "@prisma/client"
-import Image from "next/image"
 import Avatar from "./Avatar"
-import { Button } from "./ui/Button"
 import { useRouter } from "next/navigation"
+import { ScrollArea } from "./ui/scroll-area"
 
 interface Props {
     friend: FullFriendType
@@ -18,7 +16,8 @@ const RightSidebar = ({friend}: Props) => {
   const router = useRouter()
 
   return (
-    <div className="mt-3 mx-8">
+   <ScrollArea>
+      <div className="mt-3 mx-8">
       <div className="flex items-center gap-3">
         <div className="flex-1 flex items-center gap-3">
          <Avatar src={otherUser.image}/>
@@ -32,6 +31,7 @@ const RightSidebar = ({friend}: Props) => {
          </div>
       </div>
     </div>
+   </ScrollArea>
   )
 }
 

@@ -37,9 +37,9 @@ const OtherFriendModal = () => {
                 if (userId !== user.id) {
                 const friendUser = users?.find((u) => u.id === userId);
                   return friendUser ? (
-                   <div key={friendUser.id} className="p-4 hover:bg-neutral-700 transition rounded-lg w-full">
+                   <div key={friendUser.id} className="p-4 w-full">
                     <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-4 cursor-pointer" 
+                      <div className="flex items-center gap-4 cursor-pointer hover:font-medium transition" 
                       onClick={() => navigateAndCloseModal(friendUser.id)} >
                          <Avatar src={friendUser.image}/>
                           {friendUser.name}
@@ -51,9 +51,9 @@ const OtherFriendModal = () => {
                     return null;
                    })}
                  {currentUser && friend.userIds.includes(currentUser.id) && (
-                 <div key={currentUser.id} className="p-4 hover:bg-neutral-700 transition duration-300 rounded-lg w-full">
+                 <div key={currentUser.id} className="p-4 w-full">
                     <div className="flex items-center gap-4">
-                     <div className="flex items-center gap-4 cursor-pointer"
+                     <div className="flex items-center gap-4 cursor-pointer hover:font-medium transition"
                      onClick={() => navigateAndCloseModal(currentUser.id)} >
                         <Avatar src={currentUser.image}/>
                         {currentUser.name}

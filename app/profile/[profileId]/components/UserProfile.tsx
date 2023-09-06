@@ -8,6 +8,9 @@ import useFriendModal from "@/hooks/useFriendModal"
 import useOtherFriendModal from "@/hooks/useOtherFriendModal"
 import { Settings } from "lucide-react"
 import useSettingsModal from "@/hooks/useSettingsModal"
+import { BiSolidEdit } from 'react-icons/bi'
+import useEditUserModal from "@/hooks/useEditUserModal"
+import EditUserButton from "@/components/EditUserButton"
 
 interface Props {
     user?: User & { requests: Request[], friends: Friend[], posts: Post[] } | null
@@ -43,7 +46,11 @@ const UserProfile = ({user, currentUser, requests, friends, users, posts}: Props
                   <Settings/>
                 </div>
               )}
-            </div>
+
+             {currentUser?.id === user?.id && (
+               <EditUserButton user={user}/>
+                  )}
+               </div>
 
             <div className="mt-[25px] text-neutral-200 flex items-center">
                 <span className="font-medium mr-1">{user?.posts.length} </span> posts
@@ -61,19 +68,27 @@ const UserProfile = ({user, currentUser, requests, friends, users, posts}: Props
             </div>
          </div>
       </div>
-      <div className="mt-6">
-        Hello everyone!
+      <div className="mt-6 text-sm font-medium">
+        {user?.bio}
       </div>
+
       <div className="border-b border-neutral-900 w-full py-4"/>
 
       {/* GET USER POSTS */}
-      <div className="mt-4">
-        {user?.posts.map((post) => (
-          <div>
-           {post.content}
-          </div>
-        ))}
-      </div>
+      {(user?.posts && user.posts.length > 0) ? (
+         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1">
+         {user?.posts.map((post) => (
+           <div key={post.id}>
+             <Image src={post.imageUrl} width={300} height={300}
+              className="object-cover w-full h-[250px]" alt="Post"/>
+           </div>
+         ))}
+       </div>
+      ) : (
+        <div className="text-lg text-neutral-700 font-medium mt-4">
+          User has no posts
+        </div>
+      )}
     </div>
   )
 }

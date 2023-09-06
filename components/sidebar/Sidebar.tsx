@@ -26,7 +26,7 @@ const Sidebar = ({currentUser}: Props) => {
   const createPostModal = useCreatePostModal() 
 
   return (
-    <section className="fixed left-0 top-0 z-20 hidden md:flex h-full w-[220px] flex-col justify-between overflow-auto
+    <section className="fixed left-0 top-0 hidden md:flex h-full w-[220px] flex-col justify-between overflow-auto
       pb-5 pt-[20px] max-md:hidden bg-black border-r border-neutral-900 px-3">
       <div className="flex w-full flex-1 flex-col gap-6 ">
          <div className="ml-2">

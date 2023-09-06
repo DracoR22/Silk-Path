@@ -24,7 +24,7 @@ const PostsCards = ({post}: Props) => {
           </button>
         </div>
         <div className="mt-2">
-          <Image src={post.imageUrl} alt="post" height={300} width={400}
+          <Image src={post.imageUrl} alt="post" height={400} width={400}
            className="object-cover rounded-sm h-[450px]"/>
         </div>
         <div className="mt-3 flex items-center gap-2">

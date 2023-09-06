@@ -64,7 +64,7 @@ const RegisterForm = () => {
               </FormLabel>
               <FormControl>
                <Input type="text" {...field} 
-               className="border border-neutral-800 bg-neutral-700 text-white focus-visible:ring-0
+               className="border border-neutral-900 bg-neutral-900 text-white focus-visible:ring-0
                focus-visible:ring-transparent focus-visible:ring-offset-0" placeholder="Email"/>
               </FormControl>
               <FormMessage/>
@@ -78,7 +78,7 @@ const RegisterForm = () => {
               </FormLabel>
               <FormControl>
                <Input type="text" {...field} 
-               className="border border-neutral-800 bg-neutral-700 text-white focus-visible:ring-0
+               className="border border-neutral-900 bg-neutral-900 text-white focus-visible:ring-0
                focus-visible:ring-transparent focus-visible:ring-offset-0" placeholder="Name"/>
               </FormControl>
               <FormMessage/>
@@ -92,7 +92,7 @@ const RegisterForm = () => {
               </FormLabel>
               <FormControl>
                <Input type="text" {...field} 
-               className="border border-neutral-800 bg-neutral-700 text-white focus-visible:ring-0
+               className="border border-neutral-900 bg-neutral-900 text-white focus-visible:ring-0
                focus-visible:ring-transparent focus-visible:ring-offset-0" placeholder="Password"/>
               </FormControl>
               <FormMessage/>
@@ -102,14 +102,14 @@ const RegisterForm = () => {
         <div>
 
         <div className="flex items-center gap-4 mb-2">
-          <hr className="flex-grow border-t border-neutral-700" />
+          <hr className="flex-grow border-t border-neutral-900" />
           <div className="text-neutral-400 text-xs">Or</div>
-          <hr className="flex-grow border-t border-neutral-700" />
+          <hr className="flex-grow border-t border-neutral-900" />
         </div>
            
           <div>
              <Button onClick={(e) => { e.preventDefault(); signIn('google') }} 
-              className="w-full bg-black text-white hover:bg-[#101010]">
+              className="w-full bg-neutral-900 text-white hover:bg-[#101010]">
                Continue with Google 
                <span className="ml-3">
                <FcGoogle />
