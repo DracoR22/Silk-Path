@@ -11,6 +11,7 @@ import SettingsModal from "@/components/modals/SettingsModal"
 import CreatePostModal from "@/components/modals/CreatePostModal"
 import EditUserModal from "@/components/modals/EditUserModal"
 import LikedPostModal from "@/components/modals/LikedPostModal"
+import DeletePostModal from "@/components/modals/DeletePostModal"
 
 interface Props {
    friends: FullFriendType[]
@@ -40,6 +41,7 @@ const ModalProvider = ({friends, currentUser, users}: Props) => {
     <CreatePostModal/>
     <EditUserModal/>
     <LikedPostModal/>
+    <DeletePostModal/>
     </>
   )
 }

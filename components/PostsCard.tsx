@@ -4,7 +4,6 @@ import { Like, Post, User } from "@prisma/client"
 import Avatar from "./Avatar"
 import Image from "next/image"
 import { Heart, MessageCircle, MoreHorizontal } from "lucide-react"
-import { AiFillHeart } from 'react-icons/ai'
 import { FullPostType } from "@/types"
 import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
@@ -59,7 +58,7 @@ const PostsCards = ({post, likes, currentUser}: Props) => {
           </div>
         
         </div>
-        <div className="mt-2">
+        <div className="mt-2 cursor-pointer" onClick={() => router.push(`/post/${post.id}`)}>
           <Image src={post.imageUrl} alt="post" height={400} width={400}
            className="object-cover rounded-sm h-[450px]"/>
         </div>
@@ -77,7 +76,9 @@ const PostsCards = ({post, likes, currentUser}: Props) => {
            <LikeButton currentUser={currentUser} post={post} item={item} />
           </div>
            ))}
-
+            <div className="cursor-pointer" onClick={() => router.push(`/post/${post.id}`)}>
+            <MessageCircle/>
+            </div>
         </div>
         <div className="mt-2 text-sm cursor-pointer" onClick={() => onOpen({post})}>
           <span className="font-semibold">{post.likes.length}</span> likes 

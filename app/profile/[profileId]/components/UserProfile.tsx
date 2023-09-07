@@ -9,6 +9,7 @@ import useOtherFriendModal from "@/hooks/useOtherFriendModal"
 import { Settings } from "lucide-react"
 import useSettingsModal from "@/hooks/useSettingsModal"
 import EditUserButton from "@/components/EditUserButton"
+import { useRouter } from "next/navigation"
 
 interface Props {
     user?: User & { requests: Request[], friends: Friend[], posts: Post[] } | null
@@ -24,6 +25,7 @@ const UserProfile = ({user, currentUser, requests, friends, users, posts}: Props
   const friendModal = useFriendModal()
   const { onOpen } = useOtherFriendModal()
   const settingsModal = useSettingsModal()
+  const router = useRouter()
 
   return (
     <div className="mx-10 my-[30px] text-white">
@@ -59,7 +61,7 @@ const UserProfile = ({user, currentUser, requests, friends, users, posts}: Props
                 )}
 
                  {currentUser?.id !== user?.id && (
-                  <div onClick={() => onOpen({ user, currentUser, friends, users})} className="cursor-pointer">
+                  <div onClick={() => onOpen({ user, currentUser, friends, users, requests})} className="cursor-pointer">
                   <span className="font-medium ml-[45px]">{user?.friends.length}</span> friends
                   </div>
                 )}
@@ -76,9 +78,9 @@ const UserProfile = ({user, currentUser, requests, friends, users, posts}: Props
       {(user?.posts && user.posts.length > 0) ? (
          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1">
          {user?.posts.map((post) => (
-           <div key={post.id}>
+           <div key={post.id} onClick={() => router.push(`/post/${post.id}`)}>
              <Image src={post.imageUrl} width={300} height={300}
-              className="object-cover w-full h-[250px]" alt="Post"/>
+              className="object-cover w-full h-[250px] cursor-pointer" alt="Post"/>
            </div>
          ))}
        </div>

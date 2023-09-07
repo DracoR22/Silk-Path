@@ -1,4 +1,4 @@
-import { FullFriendType } from '@/types'
+import { FullFriendType, FullRequestType } from '@/types'
 import { Friend, User } from '@prisma/client'
 import { create } from 'zustand'
 
@@ -7,6 +7,7 @@ interface OtherFriendModalData {
     currentUser?: User | null
     friends?: FullFriendType[]
     users?: User[]
+    requests?: FullRequestType[]
 }
 
 interface OtherFriendModalStore {

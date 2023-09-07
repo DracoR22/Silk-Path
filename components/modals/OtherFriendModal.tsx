@@ -18,7 +18,7 @@ const OtherFriendModal = () => {
     }
  }
 
- const { user, currentUser, friends, users } = data
+ const { user, currentUser, friends, users, requests } = data
 
  const navigateAndCloseModal = (userId: string) => {
   router.push(`/profile/${userId}`);
