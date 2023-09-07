@@ -27,8 +27,8 @@ const UserProfile = ({user, currentUser, requests, friends, users, posts}: Props
 
   return (
     <div className="mx-10 my-[30px] text-white">
-      <div className="flex items-center gap-6">
-         <div>
+      <div className="sm:flex sm:items-center gap-6">
+         <div className="mb-2">
             <Image src={user?.image || '/placeholder.jpg'} alt={user?.name || ''} width={100} height={100} className="rounded-full bg-cover"/>
          </div>
 

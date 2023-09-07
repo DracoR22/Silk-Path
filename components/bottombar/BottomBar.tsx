@@ -1,7 +1,6 @@
 'use client'
 
 import useRoutes from "@/hooks/useRoutes"
-import SidebarItem from "./SidebarItem"
 import { User } from "@prisma/client"
 import Avatar from "../Avatar"
 import { usePathname, useRouter } from "next/navigation"
@@ -10,6 +9,7 @@ import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { PlusSquare } from "lucide-react"
 import useCreatePostModal from "@/hooks/useCreatePostModal"
+import BottomBarItem from "./BottomBarItem"
 import useLoginModal from "@/hooks/useLoginModal"
 
 
@@ -17,7 +17,7 @@ interface Props {
   currentUser?: User | null
 }
 
-const Sidebar = ({currentUser}: Props) => {
+const BottomBar = ({currentUser}: Props) => {
 
   const routes = useRoutes()
   const pathname = usePathname()
@@ -34,34 +34,26 @@ const Sidebar = ({currentUser}: Props) => {
     return createPostModal.onOpen()
   }
 
+
   return (
-    <section className="fixed left-0 top-0 hidden sm:flex h-full md:w-[220px] flex-col justify-between overflow-hidden
-      pb-5 pt-[20px] max-md:hidden bg-black border-r border-neutral-900 px-3">
-      <div className="flex w-full flex-1 flex-col gap-6 ">
-         <div className="ml-2">
-         <Image alt='Logo' className='cursor-pointer bg-cover '
-       height={60} width={60} src='/mooonbg.png' onClick={() => router.push('/')}/>
-         </div>
+    <section className="fixed bottom-0 w-full rounded-t-3xl p-4 text-white bg-black backdrop-blur-lg px-4 sm:hidden">
+      <div className="flex items-center justify-between gap-1">
         {routes.map((item) => (
-          <SidebarItem currentUser={currentUser} key={item.label} href={item?.href}
+            <BottomBarItem currentUser={currentUser} key={item.label} href={item?.href}
            icon={item.icon} active={item.active} label={item.label}/>
         ))}
         <div>
-          <div className="group flex gap-x-3 p-3 text-md leading-6 font-semibold
-          text-white hover:bg-neutral-900 transition duration-300 w-full rounded-md cursor-pointer"
+          <div className="relative flex flex-col items-center
+         gap-2 rounded-lg p-2 sm:flex-1 sm:px-2 sm:py-2.5 cursor-pointer"
           onClick={openModal}>
            <PlusSquare className="h-6 w-6 shrink-0"/>
-           <p className="hidden md:flex">
-             Create
-           </p>
           </div>
         </div>
         {currentUser && (
-          <Link href={`/profile/${currentUser?.id}`} className={cn(`group absolute bottom-[20px] p-2 text-md leading-6 font-semibold
-          text-white md:hover:bg-neutral-900 w-[200px] transition duration-300 rounded-md`, profileActive && 'md:bg-[#00df9a] hover:text-white md:hover:bg-[#00df9a]')}>
+          <Link href={`/profile/${currentUser?.id}`} className={cn(`relative flex flex-col items-center
+          gap-2 rounded-lg p-2 sm:flex-1 sm:px-2 sm:py-2.5`, profileActive && 'bg-[#00df9a] hover:text-white hover:bg-[#00df9a]')}>
             <div className="flex items-center gap-x-3 mr-2">
              <Avatar src={currentUser?.image}/>
-             <p className="truncate hidden md:flex">{currentUser.name}</p>
             </div>
           </Link>
         )}
@@ -70,4 +62,4 @@ const Sidebar = ({currentUser}: Props) => {
   )
 }
 
-export default Sidebar
+export default BottomBar

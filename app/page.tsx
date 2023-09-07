@@ -15,8 +15,7 @@ const likes = await getLikes()
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[2fr,1fr]">
-
-    <div className="text-white flex flex-col justify-center items-center mt-[30px]">
+    <div className="text-white flex flex-col justify-center items-center mt-[10px]  md:mt-[20px]">
      {posts.map((post) => (
         <div key={post.id}>
           <PostCards post={post} likes={likes} currentUser={currentUser}/>

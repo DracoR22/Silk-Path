@@ -21,12 +21,13 @@ const UserList = ({items, currentUser, requests, friends}: Props) => {
   return (
     <div className="w-full block mt-4">
       <div className="flex-col">
-      <div className="relative mb-6">
+      <div className="relative mb-6 hidden md:flex">
         <div className="absolute inset-y-0 left-3 flex items-center justify-center">
         <Search className="text-gray-400" />
       </div>
       <Input placeholder="Search users" onChange={(e) => setSearchText(e.target.value)}
-       className="text-white bg-neutral-900 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 border border-neutral-900 pl-12 pr-3 py-2 rounded"
+       className="text-white bg-neutral-900 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 border
+        border-neutral-900 pl-12 pr-3 py-4 rounded-full"
         />
        </div>
         {items.filter((value) => {

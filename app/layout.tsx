@@ -8,6 +8,8 @@ import getCurrentUser from '@/actions/getCurrentUser'
 import AuthProvider from '@/providers/AuthProvider'
 import getFriends from '@/actions/getFriends'
 import getUsers from '@/actions/getUsers'
+import BottomBar from '@/components/bottombar/BottomBar'
+import Navbar from '@/components/navbar/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -33,10 +35,11 @@ export default async function RootLayout({
         <ModalProvider friends={friends} currentUser={currentUser} users={users}/>
         <main>
         <Sidebar currentUser={currentUser}/>
-        <section className='md:ml-[220px] '>
+        <section className='md:ml-[220px] overflow-hidden'>
         {children}
         <Toaster/>
         </section>
+         <BottomBar currentUser={currentUser}/>
         </main>
         </AuthProvider>
       </body>

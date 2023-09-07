@@ -12,6 +12,7 @@ import axios from "axios"
 import { useToast } from "./ui/use-toast"
 import useLikedPostModal from "@/hooks/useLikedPostModal"
 import LikeButton from "./LikeButton"
+import useLoginModal from "@/hooks/useLoginModal"
 
 interface Props {
     post: FullPostType
@@ -24,6 +25,7 @@ const PostsCards = ({post, likes, currentUser}: Props) => {
   const router = useRouter()
   const { toast } = useToast()
   const { onOpen } = useLikedPostModal()
+  const loginModal = useLoginModal()
 
   const userHasLikedPost = currentUser && post.likes.some(like => like.userId === currentUser.id);
 
@@ -37,19 +39,25 @@ const PostsCards = ({post, likes, currentUser}: Props) => {
 
   }, [currentUser, router]);
 
+  const handleNavigate = () => {
+    if(!currentUser) {
+      return loginModal.onOpen()
+    }
+    router.push(`/profile/${post.userId}`)
+
+  }
+
   return (
     <div>
       <div className="p-4">
         <div className="flex items-center gap-4">
           <div className="flex-1 flex items-center gap-4 ">
-            <div className="flex items-center gap-4 cursor-pointer" onClick={() => router.push(`/profile/${post.userId}`)}>
+            <div className="flex items-center gap-4 cursor-pointer" onClick={handleNavigate}>
             <Avatar src={post.userPicture}/>
             <p className="text-sm font-bold">{post.userName}</p>
             </div>
           </div>
-          <button>
-            <MoreHorizontal/>
-          </button>
+        
         </div>
         <div className="mt-2">
           <Image src={post.imageUrl} alt="post" height={400} width={400}

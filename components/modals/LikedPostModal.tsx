@@ -32,8 +32,8 @@ const LikedPostModal = () => {
              <div>
                 {post?.likes.map((item) => (
                 <div key={item.id}>
-                  <div className="flex items-center gap-4 mt-3">
-                    <div className="flex items-center gap-4 cursor-pointer hover:font-medium
+                  <div className="flex items-center gap-5 mt-3">
+                    <div className="flex items-center gap-5 cursor-pointer hover:font-medium
                      transition flex-1" onClick={() => navigateAndCloseModal(item.userId)}>
                     <Avatar src={item.userImage}/>
                     <p>{item.userName}</p>
@@ -48,8 +48,8 @@ const LikedPostModal = () => {
              ))}
              </div>
         ) : (
-            <div>
-                This post has no likes
+            <div className="text-neutral-400">
+                Be the first to like this post!
             </div>
         )}
       </ScrollArea>

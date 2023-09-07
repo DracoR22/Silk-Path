@@ -77,19 +77,22 @@ const UserBox = ({ data, currentUser, requests, friends }: Props) => {
       <div className="flex items-center mb-6 w-full">
         <div className="flex items-center cursor-pointer" onClick={() => router.push(`/profile/${data.id}`)}>
         <Avatar src={data.image}/>
-        <p className="text-white ml-4">{data.name}</p>
+        <p className="text-white ml-4 hidden sm:flex">{data.name}</p>
         </div>
   
          <div className="absolute right-[40px]">
         {userHasPendingRequest && (
-          <Button variant='default' isLoading={isLoading} className="ml-8 bg-white hover:bg-neutral-300 transition text-black">Pending</Button>
+          <Button variant='default' isLoading={isLoading}
+           className="ml-8 bg-white hover:bg-neutral-300 transition text-black">
+           <span className="hidden sm:flex">Pending</span>
+          </Button>
         )}
 
         {!userHasPendingRequest && !usersAreFriends && (
            <div onClick={handleClick}>
            <Button variant='silkPath' isLoading={isLoading} className="ml-8 transition">
             <UserPlus className="mr-2"/>
-            Send Request
+           <span className="hidden sm:flex">Send Request</span> 
            </Button>
           </div> 
         )}
@@ -98,7 +101,7 @@ const UserBox = ({ data, currentUser, requests, friends }: Props) => {
             <Button variant='default' isLoading={isLoading}
              className="ml-8 bg-white hover:bg-neutral-300 transition text-black" onClick={handleDeleteFriend}>
               <UserCog className="mr-2"/>
-              Remove friend
+             <span className="hidden sm:flex">Remove friend</span>
             </Button>
         )}
         </div>
