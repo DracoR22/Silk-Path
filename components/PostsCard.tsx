@@ -6,11 +6,12 @@ import Image from "next/image"
 import { Heart, MessageCircle, MoreHorizontal } from "lucide-react"
 import { AiFillHeart } from 'react-icons/ai'
 import { FullPostType } from "@/types"
-import { useCallback } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import { useToast } from "./ui/use-toast"
 import useLikedPostModal from "@/hooks/useLikedPostModal"
+import LikeButton from "./LikeButton"
 
 interface Props {
     post: FullPostType
@@ -55,16 +56,20 @@ const PostsCards = ({post, likes, currentUser}: Props) => {
            className="object-cover rounded-sm h-[450px]"/>
         </div>
         <div className="mt-3 flex items-center gap-2">
-          {!userHasLikedPost && (
+          
+          {/* POST LIKE IF USER HASNT LIKED THE POST YET */}
+        {!userHasLikedPost && (
             <div onClick={handleClick}>
               <Heart className="w-6 h-6 cursor-pointer"/>
             </div>
           )}
-          {userHasLikedPost && (
-            <div>
-              <AiFillHeart className="w-6 h-6 text-white cursor-pointer"/>
-            </div>
-          )}
+          {/* DELETE THAT USER LIKE */}
+        {likes.filter((like) => like.postId === post.id).map((item) => (
+           <div key={item.id}>
+           <LikeButton currentUser={currentUser} post={post} item={item} />
+          </div>
+           ))}
+
         </div>
         <div className="mt-2 text-sm cursor-pointer" onClick={() => onOpen({post})}>
           <span className="font-semibold">{post.likes.length}</span> likes 

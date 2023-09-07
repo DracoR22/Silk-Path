@@ -36,7 +36,7 @@ interface Props {
     }
   
     return (
-        <div className="p-4">
+        <div className="p-2">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-4 cursor-pointer hover:font-medium transition" onClick={() => navigateAndCloseModal(otherUser.id)}>
               <Avatar src={otherUser.image}/>

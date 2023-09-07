@@ -8,8 +8,6 @@ import useFriendModal from "@/hooks/useFriendModal"
 import useOtherFriendModal from "@/hooks/useOtherFriendModal"
 import { Settings } from "lucide-react"
 import useSettingsModal from "@/hooks/useSettingsModal"
-import { BiSolidEdit } from 'react-icons/bi'
-import useEditUserModal from "@/hooks/useEditUserModal"
 import EditUserButton from "@/components/EditUserButton"
 
 interface Props {

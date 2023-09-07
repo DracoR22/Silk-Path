@@ -20,7 +20,7 @@ const SettingsModal = () => {
     <Modal title="Settings"  isOpen={isOpen} onChange={onChange}>
       <div className="flex w-full items-center justify-center">
         <p className="border-b border-t p-3 border-neutral-800 w-full flex items-center justify-center
-        cursor-pointer" onClick={() => signOut({callbackUrl: '/'})}>
+        cursor-pointer hover:bg-neutral-900 transition" onClick={() => signOut({callbackUrl: '/'})}>
            Log Out
         </p>
       </div>

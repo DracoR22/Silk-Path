@@ -35,28 +35,38 @@ const OtherFriendModal = () => {
                 if (userId !== user.id) {
                 const friendUser = users?.find((u) => u.id === userId);
                   return friendUser ? (
-                   <div key={friendUser.id} className="p-4 w-full">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-4 cursor-pointer hover:font-medium transition" 
-                      onClick={() => navigateAndCloseModal(friendUser.id)} >
+                   <div key={friendUser.id}>
+                     <div className="flex items-center gap-4 mt-3">
+                      <div className="flex items-center gap-4 cursor-pointer hover:font-medium
+                        transition flex-1" onClick={() => navigateAndCloseModal(friendUser.id)}>
                          <Avatar src={friendUser.image}/>
-                          {friendUser.name}
-                      </div>
-                    </div>
+                       <p>{friendUser.name}</p>
+                     </div>
+                       <button onClick={() => navigateAndCloseModal(friendUser.id)}
+                        className="p-1.5 bg-[#00df9a] text-white rounded-lg font-medium hover:bg-[#0b8a62]
+                         px-6 transition hidden sm:flex">
+                           View
+                      </button>
                    </div>
+                    </div>
                    ) : null;
                     }
                     return null;
                    })}
                  {currentUser && friend.userIds.includes(currentUser.id) && (
-                 <div key={currentUser.id} className="p-4 w-full">
-                    <div className="flex items-center gap-4">
-                     <div className="flex items-center gap-4 cursor-pointer hover:font-medium transition"
-                     onClick={() => navigateAndCloseModal(currentUser.id)} >
-                        <Avatar src={currentUser.image}/>
-                        {currentUser.name}
-                     </div>
-                   </div>
+                 <div key={currentUser.id}>
+                    <div className="flex items-center gap-4 mt-3">
+                    <div className="flex items-center gap-4 cursor-pointer hover:font-medium
+                     transition flex-1" onClick={() => navigateAndCloseModal(currentUser.id)}>
+                    <Avatar src={currentUser.image}/>
+                    <p>{currentUser.name}</p>
+                    </div>
+                    <button onClick={() => navigateAndCloseModal(currentUser.id)}
+                     className="p-1.5 bg-[#00df9a] text-white rounded-lg font-medium hover:bg-[#0b8a62]
+                      px-6 transition hidden sm:flex">
+                    View
+                  </button>
+                  </div>
                   </div>
                      )}
                  </div>

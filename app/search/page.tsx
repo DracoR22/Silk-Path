@@ -6,10 +6,10 @@ import getFriends from "@/actions/getFriends"
 
 const Page = async () => {
 
- const users = await getUsers()
  const currentUser = await getCurrentUser()
  const requests = await getRequests()
  const friends = await getFriends()
+ const users = await getUsers()
 
   return (
     <div>
