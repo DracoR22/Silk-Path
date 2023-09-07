@@ -30,7 +30,7 @@ const LikeButton = ({currentUser, post, item}: Props) => {
       .then(() => toast({variant: "silkPath", title: "Like removed"}))
       .catch(() => toast({variant: "silkPath", title: "Something went wrong while removing like"}))
   
-    }, [currentUser, router]);
+    }, [currentUser, router, item.id, toast]);
 
   return (
     <div>

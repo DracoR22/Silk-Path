@@ -36,7 +36,7 @@ const PostsCards = ({post, likes, currentUser}: Props) => {
     .then(() => router.refresh())
     .then(() => toast({variant: "silkPath", title: "Post liked!"}))
 
-  }, [currentUser, router]);
+  }, [currentUser, router, post.id, toast]);
 
   const handleNavigate = () => {
     if(!currentUser) {
