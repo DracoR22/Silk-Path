@@ -11,6 +11,8 @@ import Image from "next/image"
 import { PlusSquare } from "lucide-react"
 import useCreatePostModal from "@/hooks/useCreatePostModal"
 import useLoginModal from "@/hooks/useLoginModal"
+import { Button } from "../ui/Button"
+import useRegisterModal from "@/hooks/useRegisterModal"
 
 
 interface Props {
@@ -26,6 +28,7 @@ const Sidebar = ({currentUser}: Props) => {
 
   const createPostModal = useCreatePostModal() 
   const loginModal = useLoginModal()
+  const registerModal = useRegisterModal()
 
   const openModal = () => {
     if(!currentUser) {
@@ -64,6 +67,15 @@ const Sidebar = ({currentUser}: Props) => {
              <p className="truncate hidden md:flex">{currentUser.name}</p>
             </div>
           </Link>
+        )}
+
+       {!currentUser && (
+          <div onClick={registerModal.onOpen} className={cn(`group absolute bottom-[20px] p-2 text-md leading-6 font-semibold
+          text-white w-[200px] transition duration-300 rounded-md hidden md:flex`)}>
+            <Button variant="silkPath" className="w-full flex items-center">
+              Register
+            </Button>
+          </div>
         )}
       </div>
     </section>

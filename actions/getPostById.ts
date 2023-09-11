@@ -15,7 +15,11 @@ const getPostById = async (params: IParams) => {
             include: {
                 user: true,
                 likes: true,
-                comments: true
+                comments: {
+                    include: {
+                        user: true, // Include user information for each comment
+                    },
+                }
             }
         })
 

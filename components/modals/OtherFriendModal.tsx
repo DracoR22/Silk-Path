@@ -5,6 +5,7 @@ import Avatar from "../Avatar"
 import { ScrollArea } from "../ui/scroll-area"
 import Modal from "./Modal"
 import useOtherFriendModal from "@/hooks/useOtherFriendModal"
+import FollowButton from "../FollowButton"
 
 const OtherFriendModal = () => {
 
@@ -18,7 +19,7 @@ const OtherFriendModal = () => {
     }
  }
 
- const { user, currentUser, friends, users, requests } = data
+ const { user, currentUser, users } = data 
 
  const navigateAndCloseModal = (userId: string) => {
   router.push(`/profile/${userId}`);
@@ -42,11 +43,11 @@ const OtherFriendModal = () => {
                          <Avatar src={friendUser.image}/>
                        <p>{friendUser.name}</p>
                      </div>
-                       <button onClick={() => navigateAndCloseModal(friendUser.id)}
-                        className="p-1.5 bg-[#00df9a] text-white rounded-lg font-medium hover:bg-[#0b8a62]
-                         px-6 transition hidden sm:flex">
-                           View
-                      </button>
+                     <button onClick={() => navigateAndCloseModal(user.id)}
+                     className="p-1.5 bg-[#00df9a] text-white rounded-lg font-medium hover:bg-[#0b8a62]
+                      px-6 transition hidden sm:flex">
+                    View
+                  </button>
                    </div>
                     </div>
                    ) : null;

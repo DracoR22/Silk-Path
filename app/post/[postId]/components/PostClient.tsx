@@ -18,7 +18,9 @@ import { useForm } from "react-hook-form"
 import * as z from 'zod'
 
 interface Props {
-    post: Post & { user: User } & { likes: Like[] } & { comments: Comment[]} | null
+  post: Post & { user: User } & { likes: Like[] } & { 
+    comments: (Comment & { user: User })[]; // Include user information for each comment
+} | null;
     currentUser?: User | null
 }
 
@@ -73,8 +75,8 @@ const onSubmit = async (data: CommentFormValues) => {
        </div>
        <div className="sm:flex sm:items-center gap-3 my-3 text-sm lg:mx-24 cursor-pointer"
         onClick={() => router.push(`/profile/${post?.userId}`)}>
-          <Avatar src={post?.userPicture}/>
-         <p className="font-semibold hidden sm:flex">{post?.userName}</p>
+          <Avatar src={post?.user.image}/>
+         <p className="font-semibold hidden sm:flex">{post?.user.name}</p>
          <p className="text-neutral-400 mt-4 sm:mt-0">{post?.content}</p>
        </div>
 
@@ -89,9 +91,9 @@ const onSubmit = async (data: CommentFormValues) => {
            <div key={comment.id}>
              <div className="flex items-center gap-3 mb-3 cursor-pointer"
               onClick={() => router.push(`/profile/${comment.userId}`)}>
-                <Avatar src={comment.userImage}/>
+                <Avatar src={comment.user.image}/>
                 <div>
-                <p className="font-semibold text-sm mb-1">{comment.userName}</p>
+                <p className="font-semibold text-sm mb-1">{comment.user.name}</p>
                 <p className="text-xs font-semibold">{comment.text}</p>
              </div>
              </div>

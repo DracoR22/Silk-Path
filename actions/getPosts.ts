@@ -7,7 +7,8 @@ const getPosts = async ()  => {
                 createdAt: 'desc'
             },
             include: {
-                likes: true
+                likes: true,
+                user: true
             }
         })
 

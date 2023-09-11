@@ -1,11 +1,10 @@
 'use client'
 
-import { Like, Post, User } from "@prisma/client"
+import { Friend, Like, Post, User } from "@prisma/client"
 import Avatar from "./Avatar"
 import Image from "next/image"
 import { Heart, MessageCircle, MoreHorizontal } from "lucide-react"
-import { FullPostType } from "@/types"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import { useToast } from "./ui/use-toast"
@@ -14,7 +13,7 @@ import LikeButton from "./LikeButton"
 import useLoginModal from "@/hooks/useLoginModal"
 
 interface Props {
-    post: FullPostType
+    post: Post & { user: User } & { likes: Like[] } 
     likes: Like[]
     currentUser?: User | null
 }
@@ -52,8 +51,8 @@ const PostsCards = ({post, likes, currentUser}: Props) => {
         <div className="flex items-center gap-4">
           <div className="flex-1 flex items-center gap-4 ">
             <div className="flex items-center gap-4 cursor-pointer" onClick={handleNavigate}>
-            <Avatar src={post.userPicture}/>
-            <p className="text-sm font-bold">{post.userName}</p>
+            <Avatar src={post.user.image}/>
+            <p className="text-sm font-bold">{post.user.name}</p>
             </div>
           </div>
         
@@ -84,7 +83,7 @@ const PostsCards = ({post, likes, currentUser}: Props) => {
           <span className="font-semibold">{post.likes.length}</span> likes 
         </div>
         <div className="mt-2 border-b border-neutral-900 pb-6">
-          <p className="text-sm truncate"><span className="font-bold">{post.userName}</span> {post.content}</p>
+          <p className="text-sm truncate"><span className="font-bold">{post.user.name}</span> {post.content}</p>
         </div>
       </div>
     </div>
