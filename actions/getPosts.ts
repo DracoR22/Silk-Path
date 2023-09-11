@@ -8,7 +8,8 @@ const getPosts = async ()  => {
             },
             include: {
                 likes: true,
-                user: true
+                user: true,
+                comments: true
             }
         })
 

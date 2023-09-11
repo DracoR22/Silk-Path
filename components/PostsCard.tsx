@@ -1,6 +1,6 @@
 'use client'
 
-import { Friend, Like, Post, User } from "@prisma/client"
+import { Comment, Friend, Like, Post, User } from "@prisma/client"
 import Avatar from "./Avatar"
 import Image from "next/image"
 import { Heart, MessageCircle, MoreHorizontal } from "lucide-react"
@@ -14,7 +14,7 @@ import useLoginModal from "@/hooks/useLoginModal"
 import moment from 'moment'
 
 interface Props {
-    post: Post & { user: User } & { likes: Like[] } 
+    post: Post & { user: User } & { likes: Like[] } & { comments: Comment[] }
     likes: Like[]
     currentUser?: User | null
 }
@@ -84,8 +84,11 @@ const PostsCards = ({post, likes, currentUser}: Props) => {
         <div className="mt-2 text-sm cursor-pointer" onClick={() => onOpen({post})}>
           <span className="font-semibold">{post.likes.length}</span> likes 
         </div>
-        <div className="mt-2 border-b border-neutral-900 pb-6">
+        <div className="mt-2 border-b border-neutral-900 pb-4">
           <p className="text-sm truncate"><span className="font-bold">{post.user.name}</span> {post.content}</p>
+          {post.comments.length > 0 && (
+            <p onClick={() => router.push(`/post/${post.id}`)} className="text-xs text-neutral-500 mt-2 cursor-pointer">View all {post.comments.length} comments</p>
+          )}
         </div>
       </div>
     </div>

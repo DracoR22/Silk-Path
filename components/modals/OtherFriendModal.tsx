@@ -43,7 +43,7 @@ const OtherFriendModal = () => {
                          <Avatar src={friendUser.image}/>
                        <p>{friendUser.name}</p>
                      </div>
-                     <button onClick={() => navigateAndCloseModal(user.id)}
+                     <button onClick={() => navigateAndCloseModal(friendUser.id)}
                      className="p-1.5 bg-[#00df9a] text-white rounded-lg font-medium hover:bg-[#0b8a62]
                       px-6 transition hidden sm:flex">
                     View
