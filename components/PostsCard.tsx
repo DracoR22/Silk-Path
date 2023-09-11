@@ -11,6 +11,7 @@ import { useToast } from "./ui/use-toast"
 import useLikedPostModal from "@/hooks/useLikedPostModal"
 import LikeButton from "./LikeButton"
 import useLoginModal from "@/hooks/useLoginModal"
+import moment from 'moment'
 
 interface Props {
     post: Post & { user: User } & { likes: Like[] } 
@@ -53,6 +54,7 @@ const PostsCards = ({post, likes, currentUser}: Props) => {
             <div className="flex items-center gap-4 cursor-pointer" onClick={handleNavigate}>
             <Avatar src={post.user.image}/>
             <p className="text-sm font-bold">{post.user.name}</p>
+             <p className="text-xs text-neutral-500">{moment(post.createdAt).fromNow()}</p>
             </div>
           </div>
         
