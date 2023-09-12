@@ -43,8 +43,8 @@ const LikedPostModal = () => {
                   <div className="flex items-center gap-5 mt-3">
                     <div className="flex items-center gap-5 cursor-pointer hover:font-medium
                      transition flex-1" onClick={() => navigateAndCloseModal(item.userId)}>
-                    <Avatar src={item.userImage}/>
-                    <p>{item.userName}</p>
+                    <Avatar src={item.user.image}/>
+                    <p>{item.user.name}</p>
                     </div>
                     <button onClick={() => navigateAndCloseModal(item.userId)}
                      className="p-1.5 bg-[#00df9a] text-white rounded-lg font-medium hover:bg-[#0b8a62]

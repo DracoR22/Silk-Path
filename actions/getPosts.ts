@@ -7,7 +7,11 @@ const getPosts = async ()  => {
                 createdAt: 'desc'
             },
             include: {
-                likes: true,
+                likes: {
+                    include: {
+                        user: true
+                    }
+                },
                 user: true,
                 comments: true
             }

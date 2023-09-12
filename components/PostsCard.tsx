@@ -14,7 +14,7 @@ import useLoginModal from "@/hooks/useLoginModal"
 import moment from 'moment'
 
 interface Props {
-    post: Post & { user: User } & { likes: Like[] } & { comments: Comment[] }
+    post: Post & { user: User } & { likes: (Like & { user: User })[] }  & { comments: Comment[] }
     likes: Like[]
     currentUser?: User | null
 }

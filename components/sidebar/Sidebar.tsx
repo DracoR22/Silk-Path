@@ -76,7 +76,6 @@ const Sidebar = ({currentUser}: Props) => {
             </div>
           </Link>
         )}
-
        {!currentUser && (
           <div onClick={registerModal.onOpen} className={cn(`group absolute bottom-[20px] p-2 text-md leading-6 font-semibold
           text-white w-[200px] transition duration-300 rounded-md hidden md:flex`)}>

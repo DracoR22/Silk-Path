@@ -1,9 +1,9 @@
 import { FullPostType } from '@/types'
-import { User } from '@prisma/client'
+import { Like, Post, User } from '@prisma/client'
 import { create } from 'zustand'
 
 interface LikedPostModalData {
-    post?: FullPostType
+    post?: Post & { user: User } & { likes: (Like & { user: User })[] } 
     currentUser?: User | null
 }
 
