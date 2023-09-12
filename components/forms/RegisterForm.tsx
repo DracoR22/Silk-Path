@@ -46,8 +46,15 @@ const RegisterForm = () => {
       await axios.post('/api/register', data);
       toast({variant: 'silkPath', title: 'You created your profile!', description: 'Login to start posting!'});
       registerModal.onClose()
+      loginModal.onOpen()
     } catch (error) {
-      toast({variant: 'destructive', description: 'Invalid credentials'})
+      if(axios.isAxiosError(error)) {
+        if(error.response?.status === 401) {
+          return toast({variant: 'destructive', description: 'This email is already taken'})
+        } else {
+          return toast({variant: 'destructive', description: 'Invalid credentials'})
+        }
+      }
     } finally {
       setIsLoading(false)
     }
