@@ -9,12 +9,6 @@ const useRoutes = () => {
 
     const routes = useMemo(() => [
         {
-            label: 'Home',
-            href: '/',
-            icon: Home,
-            active: pathname === '/'
-        },
-        {
             label: 'Search',
             href: '/search',
             icon: Search,

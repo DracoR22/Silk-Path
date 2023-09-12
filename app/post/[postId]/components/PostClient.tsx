@@ -6,6 +6,7 @@ import { Form, FormControl, FormField } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
 import useDeletePostModal from "@/hooks/useDeletePostModal"
+import useLoginModal from "@/hooks/useLoginModal"
 import { CreateCommentValidation } from "@/lib/validations/post"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Comment, Like, Post, User } from "@prisma/client"
@@ -32,6 +33,7 @@ const PostClient = ({ post, currentUser}: Props) => {
  const { toast } = useToast()
  const router = useRouter()
  const { onOpen } = useDeletePostModal()
+ const loginModal = useLoginModal()
 
  const form = useForm<CommentFormValues>({
     resolver: zodResolver(CreateCommentValidation),
@@ -44,16 +46,23 @@ const PostClient = ({ post, currentUser}: Props) => {
 const onSubmit = async (data: CommentFormValues) => {
   try {
     setIsLoading(true)
-    if(!currentUser) {
-        toast({variant: "destructive", title: "Login to comment a post"})
+    if(currentUser) {
+      await axios.post('/api/comments', { postId: post?.id, data})
+      toast({variant: "silkPath", title: "Comment created!"})
+      form.reset()
+      router.refresh()
+    } else {
+      toast({variant: "destructive", title: "Login to comment a post"})
+      loginModal.onOpen()
     }
-    await axios.post('/api/comments', { postId: post?.id, data})
-    toast({variant: "silkPath", title: "Comment created!"})
-    form.reset()
-    router.refresh()
   } catch (error) {
-    toast({variant: "destructive", title: "Something went wrong!"})
-    console.log(error)
+   if(axios.isAxiosError(error)) {
+    if(error.response?.status === 401) {
+      return toast({variant: "destructive", title: "Login to comment a post"})
+    } else {
+     return toast({variant: "destructive", title: "Something went wrong!"})
+    }
+   }
   } finally {
     setIsLoading(false)
   }

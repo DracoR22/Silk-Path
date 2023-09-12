@@ -81,7 +81,7 @@ const PostsCards = ({post, likes, currentUser}: Props) => {
             <MessageCircle/>
             </div>
         </div>
-        <div className="mt-2 text-sm cursor-pointer" onClick={() => onOpen({post})}>
+        <div className="mt-2 text-sm cursor-pointer" onClick={() => onOpen({post, currentUser})}>
           <span className="font-semibold">{post.likes.length}</span> likes 
         </div>
         <div className="mt-2 border-b border-neutral-900 pb-4">

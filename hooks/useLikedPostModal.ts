@@ -1,8 +1,10 @@
 import { FullPostType } from '@/types'
+import { User } from '@prisma/client'
 import { create } from 'zustand'
 
 interface LikedPostModalData {
     post?: FullPostType
+    currentUser?: User | null
 }
 
 interface LikedPostModalStore {

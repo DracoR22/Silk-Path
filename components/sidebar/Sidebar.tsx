@@ -8,7 +8,7 @@ import { usePathname, useRouter } from "next/navigation"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
-import { PlusSquare } from "lucide-react"
+import { Home, PlusSquare } from "lucide-react"
 import useCreatePostModal from "@/hooks/useCreatePostModal"
 import useLoginModal from "@/hooks/useLoginModal"
 import { Button } from "../ui/Button"
@@ -24,6 +24,7 @@ const Sidebar = ({currentUser}: Props) => {
   const routes = useRoutes()
   const pathname = usePathname()
   const profileActive = pathname === `/profile/${currentUser?.id}`
+  const homeActive = pathname === '/'
   const router = useRouter()
 
   const createPostModal = useCreatePostModal() 
@@ -45,6 +46,13 @@ const Sidebar = ({currentUser}: Props) => {
          <Image alt='Logo' className='cursor-pointer bg-cover '
        height={60} width={60} src='/mooonbg.png' onClick={() => router.push('/')}/>
          </div>
+         <Link href={'/'} className={cn(`group flex gap-x-3 rounded-md p-3 text-md leading-6 font-semibold
+         text-white hover:bg-neutral-900 transition duration-300 w-full`, homeActive && 'bg-[#00df9a] hover:text-white hover:bg-[#00df9a]')}>
+           <Home className={cn(`h-6 w-6 shrink-0`, homeActive && 'bg-[#00df9a] hover:bg-[#00df9a]')}/>
+            <p className="hidden md:flex">
+             Home
+            </p>
+          </Link>
         {routes.map((item) => (
           <SidebarItem currentUser={currentUser} key={item.label} href={item?.href}
            icon={item.icon} active={item.active} label={item.label}/>

@@ -5,10 +5,13 @@ import { ScrollArea } from "../ui/scroll-area"
 import Modal from "./Modal"
 import useLikedPostModal from "@/hooks/useLikedPostModal"
 import Avatar from "../Avatar"
+import useLoginModal from "@/hooks/useLoginModal"
 
 const LikedPostModal = () => {
 
  const router = useRouter()
+
+ const loginModal = useLoginModal()
 
  const { onClose, isOpen, data } = useLikedPostModal()
 
@@ -18,11 +21,16 @@ const LikedPostModal = () => {
     }
  }
 
- const { post } = data
+ const { post, currentUser } = data
 
  const navigateAndCloseModal = (userId: string) => {
-    router.push(`/profile/${userId}`);
-    onClose();
+    if(currentUser) {
+      router.push(`/profile/${userId}`);
+      onClose();
+    } else {
+      onClose();
+      loginModal.onOpen()
+    }
   };
 
   return (
