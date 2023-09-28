@@ -6,6 +6,7 @@ import Modal from "./Modal"
 import useLikedPostModal from "@/hooks/useLikedPostModal"
 import Avatar from "../Avatar"
 import useLoginModal from "@/hooks/useLoginModal"
+import FollowButton from "../FollowButton"
 
 const LikedPostModal = () => {
 
@@ -21,7 +22,7 @@ const LikedPostModal = () => {
     }
  }
 
- const { post, currentUser } = data
+ const { post, currentUser, likes, requests, friends } = data
 
  const navigateAndCloseModal = (userId: string) => {
     if(currentUser) {
@@ -46,11 +47,18 @@ const LikedPostModal = () => {
                     <Avatar src={item.user.image}/>
                     <p>{item.user.name}</p>
                     </div>
-                    <button onClick={() => navigateAndCloseModal(item.userId)}
-                     className="p-1.5 bg-[#00df9a] text-white rounded-lg font-medium hover:bg-[#0b8a62]
-                      px-6 transition hidden sm:flex">
-                    View
-                  </button>
+                    {currentUser?.id === item.user.id ? (
+                      <button onClick={() => navigateAndCloseModal(item.userId)}
+                      className="p-1.5 bg-[#00df9a] text-white rounded-lg font-medium hover:bg-[#0b8a62]
+                       px-6 transition hidden sm:flex">
+                         View
+                      </button>
+                    ) : (
+                      <div>
+                         <FollowButton user={item.user} currentUser={currentUser} requests={requests} friends={friends} 
+                         onClose={onClose} isModal={true}/>
+                      </div>
+                    )}
                   </div>
                 </div>
              ))}

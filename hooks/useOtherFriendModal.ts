@@ -5,9 +5,9 @@ import { create } from 'zustand'
 interface OtherFriendModalData {
     user?: User & { friends: Friend[] } | null
     currentUser?: User | null
-    friends?: FullFriendType[]
+    friends?: any
     users?: User[]
-    requests?: FullRequestType[]
+    requests?: any
 }
 
 interface OtherFriendModalStore {

@@ -1,6 +1,6 @@
 'use client'
 
-import { Comment, Friend, Like, Post, User } from "@prisma/client"
+import { Comment, Friend, Like, Post, Request, User } from "@prisma/client"
 import Avatar from "./Avatar"
 import Image from "next/image"
 import { Heart, MessageCircle, MoreHorizontal } from "lucide-react"
@@ -12,14 +12,17 @@ import useLikedPostModal from "@/hooks/useLikedPostModal"
 import LikeButton from "./LikeButton"
 import useLoginModal from "@/hooks/useLoginModal"
 import moment from 'moment'
+import { FullFriendType, FullRequestType } from "@/types"
 
 interface Props {
     post: Post & { user: User } & { likes: (Like & { user: User })[] }  & { comments: Comment[] }
     likes: Like[]
     currentUser?: User | null
+    requests: FullRequestType[]
+    friends: FullFriendType[]
 }
 
-const PostsCards = ({post, likes, currentUser}: Props) => {
+const PostsCards = ({post, likes, currentUser, requests, friends}: Props) => {
 
   const router = useRouter()
   const { toast } = useToast()
@@ -81,7 +84,7 @@ const PostsCards = ({post, likes, currentUser}: Props) => {
             <MessageCircle/>
             </div>
         </div>
-        <div className="mt-2 text-sm cursor-pointer" onClick={() => onOpen({post, currentUser})}>
+        <div className="mt-2 text-sm cursor-pointer" onClick={() => onOpen({post, currentUser, likes, requests, friends})}>
           <span className="font-semibold">{post.likes.length}</span> likes 
         </div>
         <div className="mt-2 border-b border-neutral-900 pb-4">

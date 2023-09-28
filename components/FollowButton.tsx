@@ -14,9 +14,11 @@ interface Props {
     currentUser?: User | null
     requests: FullRequestType[]
     friends: FullFriendType[]
+    onClose?: () => void
+    isModal?: boolean
 }
 
-const FollowButton = ({ user, currentUser, requests, friends }: Props) => {
+const FollowButton = ({ user, currentUser, requests, friends, isModal, onClose }: Props) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter()
@@ -37,7 +39,13 @@ const FollowButton = ({ user, currentUser, requests, friends }: Props) => {
   const handleClick = useCallback(() => {
     setIsLoading(true);
     axios.post('/api/requests', { userId: user.id })
-      .then(() => router.refresh())
+      .then(() => {
+      if (isModal && onClose) {
+        onClose(); // Close the modal after the request is complete
+      }
+      router.refresh();
+      toast({variant: "silkPath", description: "Friend request sent!"})
+    })
       .finally(() => setIsLoading(false));
   }, [user, router]);
 
@@ -59,7 +67,13 @@ const FollowButton = ({ user, currentUser, requests, friends }: Props) => {
     if (friendIdToDelete) {
       axios
         .delete(`/api/friends/${friendIdToDelete}`)
-        .then(() => router.refresh())
+        .then(() => {
+          if (isModal && onClose) {
+            onClose(); // Close the modal after the request is complete
+          }
+          router.refresh();
+          toast({variant: "silkPath", description: "Friend has been deleted from your friendlist"})
+        })
         .catch(() =>
           toast({
             variant: "destructive",
